@@ -24,7 +24,9 @@ runs:
       shell: bash
     - name: Run new pm2 python microservice
       working-directory: ./python-greetings
-      run: pm2 start app.py --interpreter=venv/bin/python --name greetings-app-${{inputs.env}} -- --port ${{inputs.port}}
+      run: |
+        pip list
+        pm2 start app.py --interpreter=venv/bin/python --name greetings-app-${{inputs.env}} -- --port ${{inputs.port}}
       #run: pm2 start app.py --name greetings-app-${{inputs.env}} -- --port ${{inputs.port}}
       shell: bash
 
