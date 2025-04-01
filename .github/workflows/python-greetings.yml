@@ -1,0 +1,83 @@
+name: NPSTA GitHub Actions PD
+
+# Controls when the workflow will run
+on:
+  push:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  install-pip-deps:
+    runs-on: self-hosted
+    steps:
+        - uses: ./.github/actions/install-deps
+
+  deploy-to-dev:
+    runs-on: self-hosted
+    needs: [install-pip-deps]
+    steps:
+        - uses: ./.github/actions/deploy
+          with:
+            env: dev
+            port: 7001
+
+  tests-on-dev:
+    runs-on: self-hosted
+    needs: [deploy-to-dev]
+    steps:
+        - uses: ./.github/actions/test
+          with:
+            env: dev
+
+  deploy-to-staging:
+    runs-on: self-hosted
+    needs: [tests-on-dev]
+    steps:
+        - uses: ./.github/actions/deploy
+          with:
+            env: staging
+            port: 7002
+
+  tests-on-staging:
+    runs-on: self-hosted
+    needs: [deploy-to-staging]
+    steps:
+        - uses: ./.github/actions/test
+          with:
+            env: staging
+
+  deploy-to-preprod:
+    runs-on: self-hosted
+    needs: [tests-on-staging]
+    steps:
+        - uses: ./.github/actions/deploy
+          with:
+            env: preprod
+            port: 7003
+
+  tests-on-preprod:
+    runs-on: self-hosted
+    needs: [deploy-to-preprod]
+    steps:
+        - uses: ./.github/actions/test
+          with:
+            env: preprod
+
+  deploy-to-prod:
+    runs-on: self-hosted
+    needs: [tests-on-preprod]
+    steps:
+        - uses: ./.github/actions/deploy
+          with:
+            env: prod
+            port: 7004
+
+  tests-on-prod:
+    runs-on: self-hosted
+    needs: [deploy-to-prod]
+    steps:
+        - uses: ./.github/actions/test
+          with:
+            env: prod

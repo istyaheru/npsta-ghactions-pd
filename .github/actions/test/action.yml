@@ -1,0 +1,27 @@
+name: "Test python microservice"
+description: "Composite action to test our python microservice with pm2"
+inputs:
+  env:
+    description: "The environment to test the microservice"
+    required: true
+
+runs:
+  using: composite
+
+  steps:
+    - uses: actions/checkout@v4
+      with:
+        repository: "mtararujs/course-js-api-framework"
+        path: ./api-framework
+
+    - name: Info
+      run: echo "Testing on ${{inputs.env}} started"
+      shell: bash
+    - name: Install depends
+      working-directory: ./api-framework
+      run: npm install
+      shell: bash
+    - name: Run API tests
+      working-directory: ./api-framework
+      run: npm run greetings greetings_${{inputs.env}}
+      shell: bash

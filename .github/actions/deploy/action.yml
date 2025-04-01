@@ -1,0 +1,30 @@
+name: "Deploy python microservice"
+description: "Composite action to deploy the python microservice with pm2"
+inputs:
+  env:
+    description: "The environment to deploy the microservice"
+    required: true
+  port:
+    description: "The port where the pm2 service runs"
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v4
+      with:
+        repository: "mtararujs/course-js-api-framework"
+        path: ./api-framework
+
+    - name: Info
+      run: echo "Deployment to ${{inputs.env}} started"
+      shell: bash
+    - name: Delete existing pm2
+      run: pm2 delete "greetings-app-${{inputs.env}}" || true
+      shell: bash
+    - name: Run new pm2 python microservice
+      working-directory: ./python-greetings
+      run: pm2 start app.py --name greetings-app-${{inputs.env}} --port ${{inputs.port}}
+      shell: bash
+
+# RUNNER_TRACKING_ID="" && in case of failure
