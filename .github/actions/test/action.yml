@@ -21,6 +21,12 @@ runs:
       working-directory: ./api-framework
       run: npm install
       shell: bash
+    - name: pip check
+      run: pip list
+      shell: bash
+    - name: pm2 check
+      run: pm2 ls
+      shell: bash
     - name: Run API tests
       working-directory: ./api-framework
       run: npm run greetings greetings_${{inputs.env}}
