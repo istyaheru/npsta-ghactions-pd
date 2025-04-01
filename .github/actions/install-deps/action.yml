@@ -3,10 +3,10 @@ description: "Composite action to install dependencies of the python microservic
 runs:
   using: composite
   steps:
-    - uses: actions/checkout@v4
-      with:
-        repository: 'mtararujs/python-greetings'
-        path: ./python-greetings
+    #- uses: actions/checkout@v4
+      #with:
+        #repository: 'mtararujs/python-greetings'
+        #path: ./python-greetings
         
     - name: Info
       run: echo "Installing dependencies"
