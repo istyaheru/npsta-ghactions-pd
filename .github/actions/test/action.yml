@@ -10,6 +10,7 @@ runs:
 
   steps:
     - uses: actions/checkout@v4
+    - uses: actions/checkout@v4
       with:
         repository: "mtararujs/course-js-api-framework"
         path: ./api-framework
