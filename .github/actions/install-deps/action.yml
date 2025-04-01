@@ -15,7 +15,7 @@ runs:
     - name: Setup prerequisites #THIS IS HIGHLY SPECIFIC TO LINUX AND PYTHON VERSION
       working-directory: ./python-greetings
       run: |
-        python3 -m venv venv
+        RUNNER_TRACKING_ID="" && python3 -m venv venv
         source venv/bin/activate
         ls -a
       shell: bash
