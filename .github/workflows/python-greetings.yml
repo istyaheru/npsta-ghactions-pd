@@ -12,11 +12,6 @@ jobs:
   install-pip-deps:
     runs-on: self-hosted
     steps:
-        - uses: actions/checkout@v4
-        - uses: actions/checkout@v4
-          with:
-            repository: 'mtararujs/python-greetings'
-            path: ./python-greetings
         - uses: ./.github/actions/install-deps
 
   deploy-to-dev:
@@ -26,7 +21,7 @@ jobs:
         - uses: ./.github/actions/deploy
           with:
             env: dev
-            port: 7006
+            port: 7001
 
   tests-on-dev:
     runs-on: self-hosted
