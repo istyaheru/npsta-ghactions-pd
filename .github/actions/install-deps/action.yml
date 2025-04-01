@@ -16,7 +16,7 @@ runs:
       working-directory: ./python-greetings
       run: |
         RUNNER_TRACKING_ID="" && python3 -m venv venv
-        source venv/bin/activate
+        RUNNER_TRACKING_ID="" && source venv/bin/activate
         ls -a
       shell: bash
     - name: Info python
@@ -24,6 +24,6 @@ runs:
       shell: bash
     - name: Install depends
       working-directory: ./python-greetings
-      run: venv/bin/pip install -r requirements.txt #RUNNING PIP IN A VIRTUAL ENVIRONMENT IS REQUIRED FOR LINUX
+      run: RUNNER_TRACKING_ID="" && venv/bin/pip install -r requirements.txt #RUNNING PIP IN A VIRTUAL ENVIRONMENT IS REQUIRED FOR LINUX
       #run: pip install -r requirements.txt
       shell: bash
