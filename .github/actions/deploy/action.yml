@@ -21,11 +21,11 @@ runs:
       run: echo "Deployment to ${{inputs.env}} started"
       shell: bash
     - name: Delete existing pm2
-      run: pm2 delete "greetings-app-${{inputs.env}}" || true
+      run: RUNNER_TRACKING_ID="" && pm2 delete "greetings-app-${{inputs.env}}" || true
       shell: bash
     - name: Run new pm2 python microservice
       working-directory: ./python-greetings
-      run: pm2 start app.py --interpreter=/home/radon/neon-pd-actions-runner/_work/npsta-ghactions-pd/npsta-ghactions-pd/python-greetings/venv/bin/python --name greetings-app-${{inputs.env}} -- --port ${{inputs.port}}
+      run: pm2 start app.py --interpreter=/venv/bin/python --name greetings-app-${{inputs.env}} -- --port ${{inputs.port}}
       #run: pm2 start app.py --name greetings-app-${{inputs.env}} -- --port ${{inputs.port}}
       shell: bash
 
