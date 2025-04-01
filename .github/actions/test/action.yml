@@ -24,7 +24,5 @@ runs:
       shell: bash
     - name: Run API tests
       working-directory: ./api-framework
-      run: |
-        pm2 list
-        npm run greetings greetings_${{inputs.env}}
+      run: npm run greetings greetings_${{inputs.env}}
       shell: bash
