@@ -16,6 +16,7 @@ runs:
       run: |
         python3 -m venv venv
         source venv/bin/activate
+      shell: bash
     - name: Info python
       run: echo "Installing dependencies"
       shell: bash
