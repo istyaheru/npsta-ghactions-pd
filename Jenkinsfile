@@ -90,8 +90,7 @@ def deploy(String env, int port){
     echo "Deployment to ${env} has started"
     git branch: 'main', poll: false, url: 'https://github.com/mtararujs/python-greetings.git'
     sh "pm2 delete \"greetings-app-${env}\" || true"
-    sh "pm2 start app.py --name \"greetings-app-${env}\" -- --port ${port}"
-    sh "pm2 ls"
+    sh "pm2 start app.py --interpreter=./venv/bin/python --name \"greetings-app-${env}\" -- --port ${port}"
     sh "ls"
 }
 
@@ -102,6 +101,7 @@ def test(String env){
     dir('course-js-api-framework'){
         git branch: 'main', poll: false, url: 'https://github.com/mtararujs/course-js-api-framework.git'
         sh "ls"
+        sh "ls ../"
         sh "npm install"
         sh "pm2 ls"
         sh "npm run greetings greetings_${env}"
