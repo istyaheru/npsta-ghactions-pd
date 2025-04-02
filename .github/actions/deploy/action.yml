@@ -16,6 +16,10 @@ runs:
       with:
         repository: "mtararujs/course-js-api-framework"
         path: ./api-framework
+    - uses: actions/checkout@v4
+      with:
+        repository: 'mtararujs/python-greetings'
+        path: ./python-greetings
 
     - name: Info
       run: echo "Deployment to ${{inputs.env}} started"
@@ -24,7 +28,7 @@ runs:
       run: pm2 delete "greetings-app-${{inputs.env}}" || true
       shell: bash
     - name: Run new pm2 python microservice
-      working-directory: python-greetings
+      working-directory: ./python-greetings
       run: RUNNER_TRACKING_ID="" && pm2 start app.py --interpreter=/venv/bin/python --name greetings-app-${{inputs.env}} -- --port ${{inputs.port}}
       #run: pm2 start app.py --name greetings-app-${{inputs.env}} -- --port ${{inputs.port}}
       shell: bash
