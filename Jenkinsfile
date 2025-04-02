@@ -89,7 +89,7 @@ def deploy(String env, int port){
     echo "Deployment to ${env} has started"
     git branch: 'main', poll: false, url: 'https://github.com/mtararujs/python-greetings.git'
     sh "pm2 delete \"greetings-app-${env}\" || true"
-    sh "pm2 start app.py --interpreter=/venv/bin/python3 --name \"greetings-app-${env}\" -- --port ${port}"
+    sh "pm2 start app.py --name \"greetings-app-${env}\" -- --port ${port}"
 }
 
 def test(String env){
