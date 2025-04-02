@@ -80,9 +80,11 @@ def install(){
     echo "Installing pip dependencies"
     git branch: 'main', poll: false, url: 'https://github.com/mtararujs/python-greetings.git'
     sh "ls"
-    sh "python3 -m venv venv"
-    sh "source venv/bin/activate"
-    sh "venv/bin/pip install -r requirements.txt"
+    dir('python-greetings'){
+        sh "python3 -m venv venv"
+        sh "source venv/bin/activate"
+        sh "venv/bin/pip install -r requirements.txt"
+    }
 }
 
 def deploy(String env, int port){
