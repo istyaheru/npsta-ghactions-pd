@@ -83,6 +83,7 @@ def install(){
     sh "python3 -m venv venv"
     sh "source venv/bin/activate"
     sh "venv/bin/pip install -r requirements.txt"
+    sh "ls"
 }
 
 def deploy(String env, int port){
@@ -91,6 +92,7 @@ def deploy(String env, int port){
     sh "pm2 delete \"greetings-app-${env}\" || true"
     sh "pm2 start app.py --name \"greetings-app-${env}\" -- --port ${port}"
     sh "pm2 ls"
+    sh "ls"
 }
 
 def test(String env){
@@ -99,5 +101,6 @@ def test(String env){
     git branch: 'main', poll: false, url: 'https://github.com/mtararujs/course-js-api-framework.git'
     sh "ls"
     sh "npm install"
+    sh "pm2 ls"
     sh "npm run greetings greetings_${env}"
 }
