@@ -105,5 +105,6 @@ def test(String env){
         sh "npm install"
         sh "pm2 ls"
         sh "npm run greetings greetings_${env}"
+        sh "pm2 ls"
     }
 }
