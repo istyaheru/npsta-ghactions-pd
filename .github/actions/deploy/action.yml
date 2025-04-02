@@ -20,6 +20,9 @@ runs:
       with:
         repository: 'mtararujs/python-greetings'
         path: ./python-greetings
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
 
     - name: Info
       run: echo "Deployment to ${{inputs.env}} started"
@@ -29,7 +32,7 @@ runs:
       shell: bash
     - name: Run new pm2 python microservice
       working-directory: ./python-greetings
-      run: RUNNER_TRACKING_ID="" && pm2 start app.py --interpreter=/venv/bin/python3 --name greetings-app-${{inputs.env}} -- --port ${{inputs.port}}
+      run: RUNNER_TRACKING_ID="" && pm2 start app.py --interpreter=/venv/bin/python --name greetings-app-${{inputs.env}} -- --port ${{inputs.port}}
       #run: pm2 start app.py --name greetings-app-${{inputs.env}} -- --port ${{inputs.port}}
       shell: bash
 
