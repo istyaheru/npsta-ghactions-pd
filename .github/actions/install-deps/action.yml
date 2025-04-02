@@ -13,7 +13,7 @@ runs:
       run: echo "Python prerequisites on Linux"
       shell: bash    
     - name: Setup prerequisites #THIS IS HIGHLY SPECIFIC TO LINUX AND PYTHON VERSION
-      working-directory: ./python-greetings
+      working-directory: /python-greetings
       run: |
         RUNNER_TRACKING_ID="" && python3 -m venv venv
         RUNNER_TRACKING_ID="" && source venv/bin/activate
@@ -23,7 +23,7 @@ runs:
       run: echo "Installing dependencies"
       shell: bash
     - name: Install depends
-      working-directory: ./python-greetings
+      working-directory: /python-greetings
       run: RUNNER_TRACKING_ID="" && venv/bin/pip install -r requirements.txt #RUNNING PIP IN A VIRTUAL ENVIRONMENT IS REQUIRED FOR LINUX
       #run: pip install -r requirements.txt
       shell: bash
