@@ -80,9 +80,9 @@ def install(){
     echo "Installing pip dependencies"
     git branch: 'main', poll: false, url: 'https://github.com/mtararujs/python-greetings.git'
     sh "ls"
-    //sh "python3 -m venv venv"
-    //sh "source venv/bin/activate"
-    sh "pip install -r requirements.txt"
+    sh "python3 -m venv venv"
+    sh "source venv/bin/activate"
+    sh "venv/bin/pip install -r requirements.txt"
 }
 
 def deploy(String env, int port){
@@ -90,11 +90,13 @@ def deploy(String env, int port){
     git branch: 'main', poll: false, url: 'https://github.com/mtararujs/python-greetings.git'
     sh "pm2 delete \"greetings-app-${env}\" || true"
     sh "pm2 start app.py --name \"greetings-app-${env}\" -- --port ${port}"
+    sh "pm2 ls"
 }
 
 def test(String env){
     echo "Testing ${test_set} on ${env} has started"
     git branch: 'main', poll: false, url: 'https://github.com/mtararujs/course-js-api-framework.git'
+    sh "ls"
     sh "npm install"
     sh "npm run greetings greetings_${env}"
 }
