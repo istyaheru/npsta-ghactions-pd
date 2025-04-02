@@ -97,10 +97,13 @@ def deploy(String env, int port){
 
 def test(String env){
     sh "pm2 ls"
-    echo "Testing on ${env} has started"
-    git branch: 'main', poll: false, url: 'https://github.com/mtararujs/course-js-api-framework.git'
     sh "ls"
-    sh "npm install"
-    sh "pm2 ls"
-    sh "npm run greetings greetings_${env}"
+    echo "Testing on ${env} has started"
+    dir('course-js-api-framework'){
+        git branch: 'main', poll: false, url: 'https://github.com/mtararujs/course-js-api-framework.git'
+        sh "ls"
+        sh "npm install"
+        sh "pm2 ls"
+        sh "npm run greetings greetings_${env}"
+    }
 }
