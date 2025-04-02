@@ -46,7 +46,7 @@ jobs:
     steps:
         - uses: ./.github/actions/test
           with:
-            env: staging
+            env: stg
 
   deploy-to-preprod:
     runs-on: self-hosted
